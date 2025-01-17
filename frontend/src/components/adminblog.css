@@ -1,0 +1,233 @@
+/* General Admin Blog Styles */
+.admin-blog-container {
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.admin-blog-container h2 {
+  font-size: 28px;
+  color: #222;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Form Styling */
+.admin-blog-form {
+  background: linear-gradient(135deg, #ffffff, #f9f9f9);
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.admin-blog-input, .admin-blog-textarea {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  background-color: #fff;
+}
+
+.admin-blog-input:focus, .admin-blog-textarea:focus {
+  border-color: #4CAF50;
+  outline: none;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+}
+
+.admin-blog-submit-btn {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  border: none;
+  padding: 15px 25px;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.admin-blog-submit-btn:hover {
+  background: #45a049;
+  transform: translateY(-3px);
+}
+
+/* Subheading Styling */
+.admin-blog-subheadings {
+  margin-top: 30px;
+}
+
+.admin-blog-subheading {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #fdfdfd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.admin-blog-remove-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-blog-remove-btn:hover {
+  background-color: #c0392b;
+}
+
+.admin-blog-add-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.admin-blog-add-btn:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+/* Blog List Styling */
+.admin-blog-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.admin-blog-item {
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  flex: 1 1 calc(30% - 20px);
+  max-width: calc(30% - 20px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.admin-blog-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.admin-blog-item h3 {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.admin-blog-item p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+.blog-media, .subheading-media {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.admin-blog-edit-btn, .admin-blog-delete-btn, .admin-blog-like-btn {
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: all 0.3s ease;
+  color: white;
+  display: inline-block;
+}
+
+.admin-blog-edit-btn {
+  background-color: #2ecc71;
+}
+
+.admin-blog-edit-btn:hover {
+  background-color: #27ae60;
+}
+
+.admin-blog-delete-btn {
+  background-color: #e74c3c;
+}
+
+.admin-blog-delete-btn:hover {
+  background-color: #c0392b;
+}
+
+.admin-blog-like-btn {
+  background-color: #f1c40f;
+}
+
+.admin-blog-like-btn:hover {
+  background-color: #f39c12;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .admin-blog-item {
+    flex: 1 1 calc(45% - 20px);
+    max-width: calc(45% - 20px);
+  }
+
+  .admin-blog-form {
+    max-width: 90%;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-blog-item {
+    flex: 1 1 calc(100% - 20px);
+    max-width: calc(100% - 20px);
+  }
+
+  .admin-blog-form, .admin-blog-container h2 {
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-blog-container {
+    padding: 15px;
+  }
+
+  .admin-blog-input, .admin-blog-textarea {
+    font-size: 14px;
+  }
+
+  .admin-blog-submit-btn, .admin-blog-add-btn, .admin-blog-remove-btn {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+
+  .admin-blog-item {
+    padding: 15px;
+  }
+}
