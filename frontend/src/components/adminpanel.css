@@ -10,6 +10,7 @@
   font-family: 'Roboto', sans-serif;
 }
 
+
 /* Sidebar */
 .unique-admin-panel-sidebar {
   width: 260px;
@@ -192,9 +193,11 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -204,6 +207,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -214,6 +218,7 @@
     transform: scale(0.9);
     opacity: 0;
   }
+
   to {
     transform: scale(1);
     opacity: 1;
