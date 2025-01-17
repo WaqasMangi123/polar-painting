@@ -12,7 +12,7 @@ const Blog = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/blogroutes/blogs');
+        const response = await axios.get('https://polar-painting-backend.onrender.com/api/blogroutes/blogs');
         setBlogs(response.data);
       } catch (error) {
         console.error('Error fetching blogs:', error);
@@ -33,7 +33,7 @@ const Blog = () => {
   // Handle liking a blog
   const handleLike = async (blogId) => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/blogroutes/blogs/${blogId}/like`);
+      const response = await axios.put(`https://polar-painting-backend.onrender.com/api/blogroutes/blogs/${blogId}/like`);
       const updatedBlog = response.data;
 
       // Update the local state with the new likes count
@@ -82,7 +82,7 @@ const Blog = () => {
                   {blog.media && (
                     <div className="blog-thumbnail-container">
                       <img
-                        src={`http://localhost:5000/${blog.media}`}
+                        src={`https://polar-painting-backend.onrender.com/${blog.media}`}
                         alt="Blog Thumbnail"
                         className="blog-thumbnail-image"
                       />
@@ -100,7 +100,7 @@ const Blog = () => {
                         <p className="blog-subheading-content">{subheading.content}</p>
                         {subheading.media && (
                           <img
-                            src={`http://localhost:5000/${subheading.media}`}
+                            src={`https://polar-painting-backend.onrender.com/${subheading.media}`}
                             alt={`Subheading Media ${index + 1}`}
                             className="blog-subheading-image"
                           />
@@ -153,7 +153,7 @@ const Blog = () => {
             {selectedBlog.media && (
               <div className="blog-modal-main-image">
                 <img
-                  src={`http://localhost:5000/${selectedBlog.media}`}
+                  src={`https://polar-painting-backend.onrender.com/${selectedBlog.media}`}
                   alt="Blog Media"
                   className="blog-modal-image"
                 />
@@ -166,7 +166,7 @@ const Blog = () => {
                   <p className="blog-modal-subheading-content">{subheading.content}</p>
                   {subheading.media && (
                     <img
-                      src={`http://localhost:5000/${subheading.media}`}
+                      src={`https://polar-painting-backend.onrender.com/${subheading.media}`}
                       alt={`Subheading Media ${index + 1}`}
                       className="blog-modal-subheading-image"
                     />

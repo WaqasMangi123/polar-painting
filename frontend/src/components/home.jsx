@@ -94,7 +94,7 @@ const Home = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/quote/quote", { // Update URL to /api/quote/quote
+      const response = await fetch("https://polar-painting-backend.onrender.com/api/quote/quote", { // Update URL to /api/quote/quote
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -15,7 +15,7 @@ const LoginPageUnique = () => {
     setIsLoading(true);
     setError('');
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/adminlogin', { username, password });
+      const response = await axios.post('https://polar-painting-backend.onrender.com/api/auth/adminlogin', { username, password });
       localStorage.setItem('adminToken', response.data.token);
       navigate('/adminpanel');
     } catch (err) {

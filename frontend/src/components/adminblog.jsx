@@ -39,7 +39,7 @@ const AdminBlog = () => {
     setIsLoading(true);
     try {
       const adminToken = localStorage.getItem('adminToken');
-      const response = await axios.get('http://localhost:5000/api/blogroutes/blogs', {
+      const response = await axios.get('https://polar-painting-backend.onrender.com/api/blogroutes/blogs', {
         headers: { Authorization: `Bearer ${adminToken}` },
       });
       setBlogs(response.data);
@@ -203,14 +203,14 @@ const AdminBlog = () => {
       setIsLoading(true);
 
       if (editMode) {
-        await axios.put(`http://localhost:5000/api/blogroutes/blogs/${editingBlogId}`, formDataToSubmit, {
+        await axios.put(`https://polar-painting-backend.onrender.com/api/blogroutes/blogs/${editingBlogId}`, formDataToSubmit, {
           headers: {
             Authorization: `Bearer ${adminToken}`,
             'Content-Type': 'multipart/form-data',
           },
         });
       } else {
-        await axios.post('http://localhost:5000/api/blogroutes/blogs', formDataToSubmit, {
+        await axios.post('https://polar-painting-backend.onrender.com/api/blogroutes/blogs', formDataToSubmit, {
           headers: {
             Authorization: `Bearer ${adminToken}`,
             'Content-Type': 'multipart/form-data',
@@ -273,7 +273,7 @@ const AdminBlog = () => {
     const adminToken = localStorage.getItem('adminToken');
     try {
       setIsLoading(true);
-      await axios.delete(`http://localhost:5000/api/blogroutes/blogs/${id}`, {
+      await axios.delete(`https://polar-painting-backend.onrender.com/api/blogroutes/blogs/${id}`, {
         headers: { Authorization: `Bearer ${adminToken}` },
       });
       alert('Blog deleted successfully');
@@ -289,7 +289,7 @@ const AdminBlog = () => {
   const handleLike = async (id) => {
     const adminToken = localStorage.getItem('adminToken');
     try {
-      await axios.put(`http://localhost:5000/api/blogroutes/blogs/${id}/like`, {}, {
+      await axios.put(`https://polar-painting-backend.onrender.com/api/blogroutes/blogs/${id}/like`, {}, {
         headers: { Authorization: `Bearer ${adminToken}` },
       });
       fetchBlogs();
@@ -534,13 +534,13 @@ const AdminBlog = () => {
         <p><strong>Author:</strong> {blog.author}</p>
         <p><strong>Views:</strong> {blog.views}</p>
         <p><strong>Likes:</strong> {blog.likes}</p>
-        {blog.media && <img src={`http://localhost:5000/${blog.media}`} alt="Blog Media" className="blog-media" />}
+        {blog.media && <img src={`https://polar-painting-backend.onrender.com/${blog.media}`} alt="Blog Media" className="blog-media" />}
         <h4>Subheadings:</h4>
         {blog.subheadings.map((subheading, idx) => (
           <div key={idx} className="admin-blog-subheading">
             <strong>{subheading.title}</strong>
             <p>{subheading.content}</p>
-            {subheading.media && <img src={`http://localhost:5000/${subheading.media}`} alt="Subheading Media" className="subheading-media" />}
+            {subheading.media && <img src={`https://polar-painting-backend.onrender.com/${subheading.media}`} alt="Subheading Media" className="subheading-media" />}
           </div>
         ))}
         <button onClick={() => handleEdit(blog._id)} className="admin-blog-edit-btn">

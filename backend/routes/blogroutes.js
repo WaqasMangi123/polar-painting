@@ -106,7 +106,7 @@ router.get('/blogs', async (req, res) => {
     const blogs = await PolarPaintingBlog.find();
     res.status(200).json(blogs.map((blog) => ({
       ...blog.toObject(),
-      media: blog.media ? `http://localhost:5000/${blog.media}` : '',
+      media: blog.media ? `https://polar-painting-backend.onrender.com/${blog.media}` : '',
     })));
   } catch (err) {
     console.error('Error fetching blogs:', err);
@@ -129,7 +129,7 @@ router.get('/blogs/:id', async (req, res) => {
 
     res.status(200).json({
       ...blog.toObject(),
-      media: blog.media ? `http://localhost:5000/${blog.media}` : '',
+      media: blog.media ? `https://polar-painting-backend.onrender.com/${blog.media}` : '',
     });
   } catch (err) {
     console.error('Error fetching blog:', err);
