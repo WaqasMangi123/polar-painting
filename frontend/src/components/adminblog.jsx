@@ -170,82 +170,64 @@ const AdminBlog = () => {
     const adminToken = localStorage.getItem('adminToken');
 
     if (!formData.title.value.trim() || !formData.content.value.trim()) {
-      alert('Title and Content are required.');
-      return;
+        alert('Title and Content are required.');
+        return;
     }
 
-    const formDataToSubmit = new FormData();
-    formDataToSubmit.append('title', JSON.stringify(formData.title));
-    formDataToSubmit.append('content', JSON.stringify(formData.content));
-    formDataToSubmit.append('author', formData.author || 'Anonymous');
-    if (formData.media) formDataToSubmit.append('media', formData.media);
-    formDataToSubmit.append(
-      'subheadings',
-      JSON.stringify(
-        formData.subheadings.map((subheading, index) => {
-          if (subheading.media instanceof File) {
-            formDataToSubmit.append(`subheadingMedia_${index}`, subheading.media);
-          }
-          return {
+    const cleanedData = {
+        title: formData.title.value,
+        content: formData.content.value,
+        author: formData.author || 'Anonymous',
+        subheadings: formData.subheadings.map((subheading) => ({
             title: subheading.title,
             content: subheading.content,
-            fontSize: subheading.fontSize,
-            bold: subheading.bold,
-            italic: subheading.italic,
-            language: subheading.language,
-            fontFamily: subheading.fontFamily,
-          };
-        })
-      )
-    );
+        })),
+    };
+
+    const formDataToSubmit = new FormData();
+    Object.keys(cleanedData).forEach((key) => {
+        if (key === 'subheadings') {
+            formDataToSubmit.append(key, JSON.stringify(cleanedData[key]));
+        } else {
+            formDataToSubmit.append(key, cleanedData[key]);
+        }
+    });
+
+    if (formData.media) formDataToSubmit.append('media', formData.media);
 
     try {
-      setIsLoading(true);
+        setIsLoading(true);
+        const url = editMode
+            ? `https://polar-painting-backend.onrender.com/api/blogroutes/blogs/${editingBlogId}`
+            : 'https://polar-painting-backend.onrender.com/api/blogroutes/blogs';
 
-      if (editMode) {
-        await axios.put(`https://polar-painting-backend.onrender.com/api/blogroutes/blogs/${editingBlogId}`, formDataToSubmit, {
-          headers: {
-            Authorization: `Bearer ${adminToken}`,
-            'Content-Type': 'multipart/form-data',
-          },
-        });
-      } else {
-        await axios.post('https://polar-painting-backend.onrender.com/api/blogroutes/blogs', formDataToSubmit, {
-          headers: {
-            Authorization: `Bearer ${adminToken}`,
-            'Content-Type': 'multipart/form-data',
-          },
-        });
-      }
+        const method = editMode ? axios.put : axios.post;
 
-      alert('Blog submitted successfully');
-      setFormData({
-        title: { value: '', fontSize: '16', bold: false, italic: false, language: 'English', fontFamily: 'Times New Roman' },
-        content: { value: '', fontSize: '16', language: 'English', fontFamily: 'Times New Roman' },
-        author: '',
-        media: null,
-        subheadings: [
-          {
-            title: '',
-            content: '',
+        await method(url, formDataToSubmit, {
+            headers: {
+                Authorization: `Bearer ${adminToken}`,
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        alert('Blog submitted successfully');
+        setFormData({
+            title: { value: '', fontSize: '16', bold: false, italic: false, language: 'English', fontFamily: 'Times New Roman' },
+            content: { value: '', fontSize: '16', language: 'English', fontFamily: 'Times New Roman' },
+            author: '',
             media: null,
-            fontSize: '16',
-            bold: false,
-            italic: false,
-            language: 'English',
-            fontFamily: 'Times New Roman',
-          },
-        ],
-      });
-      setEditMode(false);
-      fetchBlogs();
+            subheadings: [{ title: '', content: '', media: null }],
+        });
+        setEditMode(false);
+        fetchBlogs();
     } catch (error) {
-      console.error('Error submitting blog:', error.response?.data || error.message);
-      alert(error.response?.data?.error || 'Error submitting blog');
+        console.error('Error submitting blog:', error.response?.data || error.message);
+        alert(error.response?.data?.error || 'Error submitting blog');
     } finally {
-      setIsLoading(false);
+        setIsLoading(false);
     }
-  };
+};
+
 
   const handleEdit = (blogId) => {
     const blog = blogs.find((b) => b._id === blogId);
@@ -529,7 +511,7 @@ const AdminBlog = () => {
   <div className="admin-blog-list">
     {blogs.map((blog) => (
       <div key={blog._id} className="admin-blog-item">
-        <h3>{blog.title}</h3>
+        <h3>"{blog.title}"</h3>
         <p>{blog.content}</p>
         <p><strong>Author:</strong> {blog.author}</p>
         <p><strong>Views:</strong> {blog.views}</p>

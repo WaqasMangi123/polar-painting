@@ -68,7 +68,7 @@ const Blog = () => {
             blogs.map((blog) => (
               <div key={blog._id} className="blog-card-container">
                 <div className="blog-card-header">
-                  <h2 className="blog-card-title">{blog.title}</h2>
+                  <h2 className="blog-card-title">"{blog.title}"</h2>
                   <div className="blog-meta-info">
                     <p className="blog-author-name">By {blog.author || 'Anonymous'}</p>
                     <p className="blog-publish-date">
