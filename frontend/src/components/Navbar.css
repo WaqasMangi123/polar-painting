@@ -15,29 +15,34 @@
 }
 
 .navbar.scrolled {
-  background: rgba(0, 0, 0, 0.8); /* Add background color on scroll */
+  background: rgba(0, 0, 0, 0.8);
+  /* Add background color on scroll */
 }
 
 /* Logo Styling - Increase Size */
 .navbar-logo img {
-  height: 120px; /* Increased size for larger screens */
+  height: 120px;
+  /* Increased size for larger screens */
   transition: transform 0.3s ease-in-out;
 }
 
 .navbar-logo img:hover {
-  transform: scale(1.1); /* Slightly more pronounced hover effect */
+  transform: scale(1.1);
+  /* Slightly more pronounced hover effect */
 }
 
 /* Responsive Styling for Smaller Screens */
 @media (max-width: 768px) {
   .navbar-logo img {
-    height: 100px; /* Adjust size for tablets and smaller screens */
+    height: 100px;
+    /* Adjust size for tablets and smaller screens */
   }
 }
 
 @media (max-width: 480px) {
   .navbar-logo img {
-    height: 80px; /* Further adjust size for mobile screens */
+    height: 80px;
+    /* Further adjust size for mobile screens */
   }
 }
 
@@ -83,7 +88,8 @@
 }
 
 .navbar-links a:hover {
-  color: #3498db; /* Blue hover effect */
+  color: #3498db;
+  /* Blue hover effect */
 }
 
 /* Dropdown Menu */
@@ -134,7 +140,8 @@
 }
 
 .dropdown-menu .dropdown-link:hover {
-  background-color: #3498db; /* Blue hover effect */
+  background-color: #3498db;
+  /* Blue hover effect */
   color: white;
 }
 
@@ -147,7 +154,8 @@
 
 /* Contact Button - Move to the Left */
 .navbar-contact {
-  margin-right: 1rem; /* Optional for spacing */
+  margin-right: 1rem;
+  /* Optional for spacing */
 }
 
 .navbar-contact .contact-button {
@@ -159,12 +167,14 @@
   font-weight: bold;
   transition: background 0.3s ease, transform 0.3s ease-in-out;
   position: relative;
-  left: -50px; /* Moves the button further left */
+  left: -50px;
+  /* Moves the button further left */
 }
 
 .navbar-contact .contact-button:hover {
   background-color: #2980b9;
-  transform: translateX(-10px); /* Slight additional left movement on hover */
+  transform: translateX(-10px);
+  /* Slight additional left movement on hover */
 }
 
 /* Responsive Styling */
@@ -176,16 +186,19 @@
   }
 
   .navbar-logo img {
-    height: 60px; /* Slightly smaller for smaller screens */
+    height: 60px;
+    /* Slightly smaller for smaller screens */
   }
 
   .navbar-links {
     width: 100%;
     margin-top: 1rem;
-    display: none; /* Initially hidden for mobile */
+    display: none;
+    /* Initially hidden for mobile */
     flex-direction: column;
     gap: 1rem;
-    background: rgba(0, 0, 0, 0.8); /* Add background for the dropdown */
+    background: rgba(0, 0, 0, 0.8);
+    /* Add background for the dropdown */
     border-radius: 5px;
     padding: 1rem;
   }
@@ -197,7 +210,8 @@
   }
 
   .navbar-links.show {
-    display: flex; /* Show on toggle */
+    display: flex;
+    /* Show on toggle */
   }
 
   .nav-item {
@@ -205,15 +219,18 @@
   }
 
   .navbar-contact {
-    margin-top: 1rem;
+    margin-top: 22rem;
+    /* Increase margin to move the section further down */
     margin-right: 0;
     width: 100%;
     text-align: center;
   }
 
-  .navbar-contact .contact-button {
-    width: auto;
-    left: 0; /* Reset button position */
+  /* Hide Contact and Estimator Buttons on Smaller Screens */
+  .contact-button,
+  .estimator-button {
+    display: none;
+    /* Hide buttons */
   }
 
   /* Hamburger Menu */

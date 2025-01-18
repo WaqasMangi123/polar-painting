@@ -94,7 +94,7 @@ const Home = () => {
     }
 
     try {
-      const response = await fetch("https://polar-painting-backend.onrender.com/api/quote/quote", { // Update URL to /api/quote/quote
+      const response = await fetch("http://localhost:5000/api/quote/quote", { // Update URL to /api/quote/quote
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -243,42 +243,44 @@ const Home = () => {
         </form>
       </div>
 
-      {/* Block 3 */}
-      <div className="block-3">
-        <div className="block-3-content">
-          <h2 className="block-3-title">
-            Transform Your Space with Professional Home Painting Services in Toronto
-          </h2>
-          <p className="block-3-description">
-          Elevate your home's aesthetic with our professional home painting services in Toronto.
-From interiors to exteriors, we deliver precision and style. Trust our Toronto painting experts
-for eco-friendly materials, skilled painters, and exceptional results.
-.
-          </p>
-          <div className="block-3-icons">
-            <div className="block-3-icon">
-              <i className="fas fa-paint-roller"></i>
-              <h4>Experienced Painters</h4>
-              <p>
-             Our team of Toronto painters brings years of expertise, guaranteeing smooth finishes
-              and lasting results for your home or business.
-              </p>
-            </div>
-            <div className="block-3-icon">
-              <i className="fas fa-brush"></i>
-              <h4>Quality over Quantity</h4>
-              <p>
-              We emphasize delivering exceptional craftsmanship, focusing on detail to ensure
-              every painting project exceeds expectations.
-              </p>
-            </div>
-          </div>
-          <button className="block-3-btn">ABOUT US</button>
-        </div>
-        <div className="block-3-image">
-          <img src="/block3.webp" alt="Professional Home Painting" />
-        </div>
+    {/* Block 3 */}
+<div className="block-3">
+  <div className="block-3-content">
+    <h2 className="block-3-title">
+      Transform Your Space with Professional Home Painting Services in Toronto
+    </h2>
+    <p className="block-3-description">
+      Elevate your home's aesthetic with our professional home painting services in Toronto.
+      From interiors to exteriors, we deliver precision and style. Trust our Toronto painting
+      experts for eco-friendly materials, skilled painters, and exceptional results.
+    </p>
+    <div className="block-3-icons">
+      <div className="block-3-icon">
+        <i className="fas fa-paint-roller"></i>
+        <h4>Experienced Painters</h4>
+        <p>
+          Our team of Toronto painters brings years of expertise, guaranteeing smooth finishes
+          and lasting results for your home or business.
+        </p>
       </div>
+      <div className="block-3-icon">
+        <i className="fas fa-brush"></i>
+        <h4>Quality over Quantity</h4>
+        <p>
+          We emphasize delivering exceptional craftsmanship, focusing on detail to ensure
+          every painting project exceeds expectations.
+        </p>
+      </div>
+    </div>
+    {/* ABOUT US Button with Link */}
+    <Link to="/about">
+      <button className="block-3-btn">ABOUT US</button>
+    </Link>
+  </div>
+  <div className="block-3-image">
+    <img src="/block3.webp" alt="Professional Home Painting" />
+  </div>
+</div>
 
       {/* Block 4 - Our Services */}
       <div className="block-4">
@@ -432,7 +434,7 @@ unparalleled precision for every project.
     </div>
   </div>
   <div className="learn-more-container">
-    <a href="/terms-and-conditions" className="learn-more-button">
+    <a href="/termsandcondition" className="learn-more-button">
       Learn More
     </a>
   </div>
@@ -461,11 +463,11 @@ unparalleled precision for every project.
     {/* Contact Information */}
     <div className="block-8-contact">
       <button className="block-8-phone">
-        <i className="fas fa-phone-alt"></i> (647) 366-3737
+        <i className="fas fa-phone-alt"></i> 416 238 7373
       </button>
       <div className="block-8-links">
         <span>
-          <i className="fas fa-envelope"></i> info@northernpainting.ca
+          <i className="fas fa-envelope"></i> info@polarpainting.ca
         </span>
         <span>
           <i className="fas fa-paper-plane"></i> Contact Us

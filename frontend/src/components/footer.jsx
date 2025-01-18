@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import "./footer.css";
 
 const Footer = () => {
@@ -27,22 +28,28 @@ const Footer = () => {
           <h3 className="footer-subtitle">Quick Links</h3>
           <ul className="footer-links">
             <li>
-              <a href="/">Home</a>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <a href="/about-us">About Us</a>
+              <Link to="/adminlogin">Admin</Link>
             </li>
             <li>
-              <a href="/services">Services</a>
+              <Link to="/about">About Us</Link>
             </li>
             <li>
-              <a href="/contact-us">Contact Us</a>
+              <Link to="/services">Services</Link>
             </li>
             <li>
-              <a href="/faqs">FAQs</a>
+              <Link to="/contact">Contact Us</Link>
             </li>
             <li>
-              <a href="/blog">Blog</a>
+              <Link to="/faq">FAQs</Link>
+            </li>
+            <li>
+              <Link to="/blog">Blog</Link>
+            </li>
+            <li>
+              <Link to="/costestimator">Estimator</Link> {/* New Quick Link Added */}
             </li>
           </ul>
         </div>
@@ -52,22 +59,22 @@ const Footer = () => {
           <h3 className="footer-subtitle">Our Services</h3>
           <ul className="footer-links">
             <li>
-              <a href="/services/interior-painting">Interior Painting</a>
+              <Link to="/services">Interior Painting</Link>
             </li>
             <li>
-              <a href="/services/exterior-painting">Exterior Painting</a>
+              <Link to="/services">Exterior Painting</Link>
             </li>
             <li>
-              <a href="/services/cabinet-painting">Cabinet Painting</a>
+              <Link to="/services">Cabinet Painting</Link>
             </li>
             <li>
-              <a href="/services/commercial-painting">Commercial Painting</a>
+              <Link to="/services">Commercial Painting</Link>
             </li>
             <li>
-              <a href="/services/condo-painting">Condo Painting</a>
+              <Link to="/services">Condo Painting</Link>
             </li>
             <li>
-              <a href="/services/wallpaper-installation">Wallpaper Installation</a>
+              <Link to="/services">Wallpaper Installation</Link>
             </li>
           </ul>
         </div>
@@ -77,17 +84,17 @@ const Footer = () => {
           <h3 className="footer-subtitle">Contact Information</h3>
           <ul className="footer-contact">
             <li>
-              <i className="fas fa-map-marker-alt"></i> 4141 Yonge St, North York, ON M2P 2A6
+              <i className="fas fa-map-marker-alt"></i> 2967 Dundas St W, Toronto, ON, M6P 1Z2
             </li>
             <li>
               <i className="fas fa-envelope"></i>{" "}
               <a href="mailto:info@polarpainting.ca">
-              info@polarpainting.ca
+                info@polarpainting.ca
               </a>
             </li>
             <li>
               <i className="fas fa-phone-alt"></i>{" "}
-              <a href="tel:+14162387373">(647) 366-3737</a>
+              <a href="tel:+14162387373">416 238 7373</a>
             </li>
             <li>
               <i className="fas fa-clock"></i> Mon - Sun: 7 AM - 11 PM
@@ -104,8 +111,8 @@ const Footer = () => {
             reserved.
           </p>
           <div className="footer-policies">
-            <a href="/terms-and-conditions">Terms & Conditions</a> |{" "}
-            <a href="/privacy-policy">Privacy Policy</a>
+            <Link to="/terms-and-conditions">Terms & Conditions</Link> |{" "}
+            <Link to="/privacy-policy">Privacy Policy</Link>
           </div>
           <p>
             Powered by{" "}

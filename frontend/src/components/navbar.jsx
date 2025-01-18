@@ -27,7 +27,7 @@ const Navbar = () => {
       {/* Contact Section */}
       <div className="navbar-contact">
         <a href="tel:+4162387373" className="contact-button">
-          <i className="fa fa-phone"></i> (647) 366-3737
+          <i className="fa fa-phone"></i> 416 238 7373
         </a>
         <Link to="/costestimator" className="contact-button estimator-button">
           Estimator

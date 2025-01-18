@@ -49,7 +49,8 @@
 }
 
 .footer-phone {
-  color: #f1f1f1; /* Same white color as other links */
+  color: #f1f1f1;
+  /* Same white color as other links */
   text-decoration: none;
   font-weight: bold;
   font-size: 18px;
@@ -69,7 +70,8 @@
 .footer-links a,
 .footer-contact a,
 .footer-phone {
-  color: #f1f1f1; /* Ensure consistent white color */
+  color: #f1f1f1;
+  /* Ensure consistent white color */
   text-decoration: none;
   font-size: 16px;
   transition: color 0.3s ease;
@@ -79,7 +81,8 @@
 .footer-contact a:hover,
 .footer-phone:hover {
   text-decoration: underline;
-  color: #f4b400; /* Hover effect with golden color */
+  color: #f4b400;
+  /* Hover effect with golden color */
 }
 
 .footer-contact i {
@@ -115,11 +118,13 @@
 .footer-text p {
   margin: 5px 0;
   font-size: 14px;
-  color: #f1f1f1; /* White color for footer text */
+  color: #f1f1f1;
+  /* White color for footer text */
 }
 
 .footer-text a {
-  color: #f1f1f1; /* Same white color as other links */
+  color: #f1f1f1;
+  /* Same white color as other links */
   text-decoration: none;
   font-size: 15px;
   transition: color 0.3s ease;
@@ -127,7 +132,8 @@
 
 .footer-text a:hover {
   text-decoration: underline;
-  color: #f4b400; /* Hover effect with golden color */
+  color: #f4b400;
+  /* Hover effect with golden color */
 }
 
 /* Responsive Design */
@@ -207,14 +213,16 @@
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 15px;
-  color: #f1f1f1; /* White color */
+  color: #f1f1f1;
+  /* White color */
 }
 
 .footer-about,
 .footer-phone {
   margin: 10px 0;
   font-size: 16px;
-  color: #f1f1f1; /* White color */
+  color: #f1f1f1;
+  /* White color */
 }
 
 .footer-phone {
@@ -237,7 +245,8 @@
 .footer-links a,
 .footer-contact a,
 .footer-phone {
-  color: #f1f1f1; /* Ensure consistent white color */
+  color: #f1f1f1;
+  /* Ensure consistent white color */
   text-decoration: none;
   font-size: 16px;
   transition: color 0.3s ease;
@@ -247,7 +256,8 @@
 .footer-contact a:hover,
 .footer-phone:hover {
   text-decoration: underline;
-  color: #f4b400; /* Hover effect with golden color */
+  color: #f4b400;
+  /* Hover effect with golden color */
 }
 
 .footer-contact i {
@@ -262,11 +272,13 @@
 }
 
 .footer-bottom-content {
-  color: #f1f1f1; /* White color for footer bottom text */
+  color: #f1f1f1;
+  /* White color for footer bottom text */
 }
 
 .footer-policies a {
-  color: #f1f1f1; /* Same white color as other links */
+  color: #f1f1f1;
+  /* Same white color as other links */
   text-decoration: none;
   font-size: 15px;
   transition: color 0.3s ease;
@@ -274,7 +286,8 @@
 
 .footer-policies a:hover {
   text-decoration: underline;
-  color: #f4b400; /* Hover effect with golden color */
+  color: #f4b400;
+  /* Hover effect with golden color */
 }
 
 .footer-bottom-content p {
@@ -283,12 +296,14 @@
 }
 
 .footer-bottom-content a {
-  color: #f1f1f1; /* White color for links */
+  color: #f1f1f1;
+  /* White color for links */
   text-decoration: none;
 }
 
 .footer-bottom-content a:hover {
-  color: #f4b400; /* Hover effect with golden color */
+  color: #f4b400;
+  /* Hover effect with golden color */
 }
 
 /* Responsive Design */
