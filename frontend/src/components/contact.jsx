@@ -54,7 +54,7 @@ const ContactHeader = () => {
       setSubmissionStatus(null); // Reset submission status before sending request
 
       try {
-        const response = await fetch('http://localhost:5000/api/contact/contact', {
+        const response = await fetch('https://polar-painting-backend.onrender.com/api/contact/contact', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

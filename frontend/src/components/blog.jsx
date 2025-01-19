@@ -154,7 +154,7 @@ const Blog = () => {
               <div className="blog-modal-main-image">
                 <img
                   src={`https://polar-painting-backend.onrender.com/${selectedBlog.media}`}
-                  alt="Blog Media"
+                  alt="Blog Medias"
                   className="blog-modal-image"
                 />
               </div>
