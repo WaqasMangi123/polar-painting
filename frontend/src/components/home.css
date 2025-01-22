@@ -76,7 +76,7 @@
 @media (max-width: 768px) {
   .content h1.hero-title {
     font-size: 2.5rem;
-    /* Smaller size for smaller screens */
+    /* Slightly smaller size for smaller screens */
     margin-top: 5rem;
     letter-spacing: 1px;
   }
@@ -84,6 +84,34 @@
   .content p.hero-subtitle {
     font-size: 1.5rem;
     /* Adjusted size for smaller screens */
+  }
+
+  .hero-section {
+    height: auto;
+    /* Allow dynamic height for smaller screens */
+    padding: 20px;
+  }
+
+  .content {
+    max-width: 90%;
+    padding: 10px;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+  }
+
+  .content p.hero-subtitle {
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
   }
 }
 
@@ -97,6 +125,13 @@
   .content p.hero-subtitle {
     font-size: 1.2rem;
     /* Adjusted size for extra-small screens */
+    line-height: 1.4;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
   }
 }
 
@@ -174,61 +209,6 @@
   }
 }
 
-/* Responsive Styling */
-@media (max-width: 768px) {
-  .hero-section {
-    height: auto;
-    /* Allow dynamic height for smaller screens */
-    padding: 20px;
-  }
-
-  .content {
-    max-width: 90%;
-    padding: 10px;
-  }
-
-  .content h1.hero-title {
-    font-size: 2.5rem;
-    margin-top: 5rem;
-    letter-spacing: 1px;
-  }
-
-  .content p.hero-subtitle {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-    line-height: 1.5;
-  }
-
-  .buttons {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .btn-primary,
-  .btn-secondary {
-    width: 100%;
-    font-size: 1rem;
-    padding: 0.8rem 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .content h1.hero-title {
-    font-size: 2rem;
-    margin-top: 4rem;
-  }
-
-  .content p.hero-subtitle {
-    font-size: 0.9rem;
-    line-height: 1.4;
-  }
-
-  .btn-primary,
-  .btn-secondary {
-    font-size: 0.9rem;
-    padding: 0.6rem 1.2rem;
-  }
-}
 
 
 /* Full Page Quote Block Styling */
@@ -536,8 +516,20 @@
   transition: background-color 0.3s ease, transform 0.3s ease;
   margin-top: 1.5rem;
   /* Adds space above the button */
-  margin-left: 15.5rem;
+  display: block;
+  /* Makes the button block-level */
+  margin-left: auto;
+  /* Automatically adjusts left margin */
+  margin-right: auto;
+  /* Automatically adjusts right margin */
+  width: 200px;
+  /* Set a fixed width for desktop size */
+  max-width: 100%;
+  /* Ensures the button doesn't exceed the screen width */
+  text-align: center;
+  /* Centers the text inside the button */
 }
+
 
 .block-3-btn:hover {
   background-color: #0d47a1;
@@ -689,12 +681,14 @@
 
 
 
+/* Block 4 Styling */
 .block-4 {
   text-align: center;
   padding: 4rem 2rem;
   background: linear-gradient(to bottom, #ffffff, #ffffff);
 }
 
+/* Title Styling */
 .block-4-title {
   font-size: 2.5rem;
   font-weight: bold;
@@ -702,6 +696,7 @@
   margin-bottom: 1rem;
 }
 
+/* Subtitle Styling */
 .block-4-subtitle {
   font-size: 1.1rem;
   color: #555;
@@ -709,12 +704,15 @@
   margin: 0 auto 3rem;
 }
 
+/* Card Grid Layout */
 .block-4-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* Makes it responsive */
   gap: 2rem;
 }
 
+/* Service Card Styling */
 .service-card {
   background: #E3F2FD;
   border-radius: 10px;
@@ -745,6 +743,7 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+/* Call-to-Action Section */
 .call-to-action {
   display: flex;
   justify-content: space-between;
@@ -774,6 +773,50 @@
 
 .cta-button:hover {
   background-color: #357ab7;
+}
+
+/* Desktop Specific Adjustments */
+@media (min-width: 1024px) {
+  .block-4-title {
+    font-size: 3rem;
+    /* Larger title for desktop */
+  }
+
+  .block-4-subtitle {
+    font-size: 1.3rem;
+    /* Increase subtitle size for desktop */
+    max-width: 1000px;
+    /* Increase max width for better alignment */
+  }
+
+  .block-4-cards {
+    grid-template-columns: repeat(3, 1fr);
+    /* Show 3 columns of cards on larger screens */
+    gap: 3rem;
+    /* Increase gap between cards on desktop */
+  }
+
+  .service-card img {
+    height: 250px;
+    /* Adjust image height for desktop */
+  }
+
+  .call-to-action {
+    padding: 2rem 4rem;
+    /* Make padding larger for desktop */
+  }
+
+  .cta-text {
+    font-size: 1.5rem;
+    /* Larger text for call-to-action */
+  }
+
+  .cta-button {
+    font-size: 1.2rem;
+    /* Make button font bigger */
+    padding: 1rem 2rem;
+    /* Increase padding on desktop */
+  }
 }
 
 /* Block 5 - Professional Home Painting */

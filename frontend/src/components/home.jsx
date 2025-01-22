@@ -463,7 +463,7 @@ unparalleled precision for every project.
     {/* Contact Information */}
     <div className="block-8-contact">
       <button className="block-8-phone">
-        <i className="fas fa-phone-alt"></i> 416 238 7373
+        <i className="fas fa-phone-alt"></i> (647) 366-3737
       </button>
       <div className="block-8-links">
         <span>

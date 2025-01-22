@@ -214,9 +214,9 @@ const ContactHeader = () => {
           <div className="contact-details">
             <div className="contact-info">
               <h3>Contact Information</h3>
-              <p><strong>Phone Number:</strong> 416 238 7373</p>
+              <p><strong>Phone Number:</strong>  (647) 366-3737</p>
               <p><strong>Email Address:</strong> <a href="mailto:info@polarpainting.ca">info@polarpainting.ca</a></p>
-              <p><strong>Office Address:</strong> 2967 Dundas St W, Toronto, ON, M6P 1Z2</p>
+              <p><strong>Office Address:</strong> 4141 Yonge St, North York, ON M2P 2A6</p>
               <p><strong>Business Hours:</strong> Mon - Sun: 7 AM - 11 PM</p>
             </div>
 

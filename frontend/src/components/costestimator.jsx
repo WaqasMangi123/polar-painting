@@ -72,7 +72,7 @@ const CostEstimator = () => {
         estimate: estimate.toFixed(2),
       });
 
-      const response = await axios.post('http://localhost:5000/api/estimatoremail/send-estimate', {
+      const response = await axios.post('https://polar-painting-backend.onrender.com/api/estimatoremail/send-estimate', {
         name: contactInfo.name,
         email: contactInfo.email,
         phone: contactInfo.phone,
@@ -684,7 +684,7 @@ const renderStep = () => {
               }}
             >
               <img
-                src="/condo.png"
+                src="/CONDO.png"
                 alt="Whole House"
                 style={{ marginRight: "10px", width: "40px" }}
               />{" "}

@@ -84,7 +84,7 @@ const Footer = () => {
           <h3 className="footer-subtitle">Contact Information</h3>
           <ul className="footer-contact">
             <li>
-              <i className="fas fa-map-marker-alt"></i> 2967 Dundas St W, Toronto, ON, M6P 1Z2
+              <i className="fas fa-map-marker-alt"></i> 4141 Yonge St, North York, ON M2P 2A6
             </li>
             <li>
               <i className="fas fa-envelope"></i>{" "}
@@ -94,7 +94,7 @@ const Footer = () => {
             </li>
             <li>
               <i className="fas fa-phone-alt"></i>{" "}
-              <a href="tel:+14162387373">416 238 7373</a>
+              <a href="tel:+14162387373">(647) 366-3737</a>
             </li>
             <li>
               <i className="fas fa-clock"></i> Mon - Sun: 7 AM - 11 PM
@@ -111,8 +111,8 @@ const Footer = () => {
             reserved.
           </p>
           <div className="footer-policies">
-            <Link to="/terms-and-conditions">Terms & Conditions</Link> |{" "}
-            <Link to="/privacy-policy">Privacy Policy</Link>
+            <Link to="/termsandcondition">Terms & Conditions</Link> |{" "}
+            <Link to="/termsandcondition">Privacy Policy</Link>
           </div>
           <p>
             Powered by{" "}

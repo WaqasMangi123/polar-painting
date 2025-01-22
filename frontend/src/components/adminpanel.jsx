@@ -46,7 +46,7 @@ const AdminPanel = () => {
 
   const fetchAnalyticsData = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/analytics');
+      const response = await fetch('https://polar-painting-backend.onrender.com/api/analytics');
       const { success, data } = await response.json();
 
       if (success && data.length > 0) {
@@ -108,7 +108,7 @@ const AdminPanel = () => {
 
   const fetchBlogLikesData = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/blogroutes/blogs');
+      const response = await axios.get('https://polar-painting-backend.onrender.com/api/blogroutes/blogs');
       const blogs = response.data;
 
       if (blogs && blogs.length > 0) {
