@@ -119,7 +119,7 @@ const Home = () => {
       <Navbar />
 
      {/* Hero Section */}
-<div className="hero-slider">
+     <div className="hero-slider">
   <Slider {...sliderSettings} aria-label="Hero Image Slider">
     {sliderImages.map((image, index) => (
       <div key={index} className="slider-item">
@@ -138,9 +138,12 @@ const Home = () => {
         Reliable Painters for all Residential and Commercial Projects
       </p>
       <div className="buttons">
-        <button className="btn-primary" aria-label="Get Started">
-          Get Started
-        </button>
+        {/* Wrap the button with a Link to services.jsx */}
+        <Link to="/services">
+          <button className="btn-primary" aria-label="Get Started">
+            Get Started
+          </button>
+        </Link>
         <Link to="/costestimator">
           <button className="btn-secondary" aria-label="Get Quote">
             Get Quote
@@ -150,7 +153,6 @@ const Home = () => {
     </div>
   </div>
 </div>
-
 
       {/* Quote Block with Image Background */}
       <div

@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // For React Router navigation
 import './Navbar.css';
 
 const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Track if the menu is open
+
+  // Toggle the navbar menu
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <header className="navbar">
       {/* Logo Section */}
@@ -12,15 +19,28 @@ const Navbar = () => {
         </Link>
       </div>
 
+      {/* Hamburger Menu with Close Option */}
+      <div className="navbar-toggle" onClick={toggleMenu}>
+        {isMenuOpen ? (
+          <div className="close-icon">&times;</div> // Close icon
+        ) : (
+          <>
+            <div className="bar"></div>
+            <div className="bar"></div>
+            <div className="bar"></div>
+          </>
+        )}
+      </div>
+
       {/* Navigation Links */}
-      <nav className="navbar-links">
+      <nav className={`navbar-links ${isMenuOpen ? 'show' : ''}`}>
         <ul>
-          <li><Link to="/" className="nav-link">HOME</Link></li>
-          <li><Link to="/about" className="nav-link">ABOUT</Link></li>
-          <li><Link to="/services" className="nav-link">SERVICES</Link></li>
-          <li><Link to="/faq" className="nav-link">FAQS</Link></li>
-          <li><Link to="/blog" className="nav-link">BLOG</Link></li>
-          <li><Link to="/contact" className="nav-link">CONTACT</Link></li>
+          <li><Link to="/" className="nav-link" onClick={toggleMenu}>HOME</Link></li>
+          <li><Link to="/about" className="nav-link" onClick={toggleMenu}>ABOUT</Link></li>
+          <li><Link to="/services" className="nav-link" onClick={toggleMenu}>SERVICES</Link></li>
+          <li><Link to="/faq" className="nav-link" onClick={toggleMenu}>FAQS</Link></li>
+          <li><Link to="/blog" className="nav-link" onClick={toggleMenu}>BLOG</Link></li>
+          <li><Link to="/contact" className="nav-link" onClick={toggleMenu}>CONTACT</Link></li>
         </ul>
       </nav>
 

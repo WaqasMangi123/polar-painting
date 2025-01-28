@@ -311,10 +311,17 @@
   .footer-top {
     flex-direction: column;
     text-align: center;
+    align-items: center;
+    /* Center all elements */
   }
 
   .footer-column {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    /* Adjust spacing between sections */
+    width: 100%;
+    /* Ensure full width for each column */
+    text-align: center;
+    /* Center text inside columns */
   }
 
   .footer-logo img {
@@ -328,9 +335,27 @@
   .footer-links a,
   .footer-contact i {
     font-size: 15px;
+    display: block;
+    /* Ensure links and icons stack */
+    margin-bottom: 5px;
+    /* Add spacing between links */
   }
 
   .footer-policies a {
     font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .footer-quick-links,
+  .footer-services,
+  .footer-contact-info {
+    display: flex;
+    flex-direction: column;
+    /* Stack items vertically */
+    align-items: center;
+    /* Center align items */
+    margin-bottom: 20px;
+    /* Add spacing between sections */
   }
 }

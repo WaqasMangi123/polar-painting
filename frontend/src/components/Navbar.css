@@ -186,7 +186,7 @@
   }
 
   .navbar-logo img {
-    height: 60px;
+    height: 90px;
     /* Slightly smaller for smaller screens */
   }
 
@@ -242,9 +242,58 @@
     color: white;
     cursor: pointer;
     margin-left: auto;
+    flex-direction: column;
+    /* Stack the lines vertically */
   }
 
   .navbar-toggle.open .bar {
     transform: rotate(45deg);
   }
+
+  /* Hamburger Menu */
+  .navbar-toggle {
+    display: flex;
+    justify-content: flex-start;
+    /* Align the hamburger icon to the left */
+    align-items: center;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+    margin-left: 15px;
+    /* Adjust margin for better left alignment */
+    flex-direction: column;
+    /* Stack the lines vertically */
+  }
+
+  /* Hamburger Bar Styling */
+  .navbar-toggle .bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 4px 0;
+    transition: 0.3s ease-in-out;
+  }
+
+  /* Adjust Hamburger Bar Appearance for Proper Look */
+  .navbar-toggle .bar:first-child {
+    margin-top: 0;
+    margin-left: 0;
+    /* Adjust to center more */
+  }
+
+  .navbar-toggle .bar:last-child {
+    margin-bottom: 0;
+    margin-left: 0;
+    /* Adjust to center more */
+  }
+
+  @media (max-width: 768px) {
+    .navbar-toggle {
+      margin-left: 10px;
+      /* Fine-tune alignment for mobile screens */
+      justify-content: flex-start;
+      /* Ensure the hamburger is aligned to the left on mobile */
+    }
+  }
+
 }

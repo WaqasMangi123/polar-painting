@@ -10,6 +10,8 @@
   background-size: cover;
   background-position: center;
   overflow: hidden;
+  padding: 0 20px;
+  /* Added padding for mobile screens */
 }
 
 /* Slider Image Full Block */
@@ -40,13 +42,11 @@
   color: #ffffff;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
   text-align: center;
-  /* Center align all text within content */
 }
 
 /* Hero Title */
 .content h1.hero-title {
   font-size: 3rem;
-  /* Reduced size */
   font-weight: 800;
   margin-bottom: 1.5rem;
   margin-top: 9rem;
@@ -54,85 +54,16 @@
   letter-spacing: 2px;
   line-height: 1.2;
   animation: fadeInDown 1s ease-in-out;
-  text-align: center;
-  /* Center align */
 }
 
 /* Hero Subtitle */
 .content p.hero-subtitle {
   font-size: 2rem;
-  /* Slightly increased size */
   font-weight: 600;
-  /* Add some weight for better emphasis */
   margin-bottom: 2.5rem;
   line-height: 1.8;
   opacity: 0.95;
   animation: fadeInUp 1s ease-in-out;
-  text-align: center;
-  /* Center align */
-}
-
-/* Responsive Styling Adjustments */
-@media (max-width: 768px) {
-  .content h1.hero-title {
-    font-size: 2.5rem;
-    /* Slightly smaller size for smaller screens */
-    margin-top: 5rem;
-    letter-spacing: 1px;
-  }
-
-  .content p.hero-subtitle {
-    font-size: 1.5rem;
-    /* Adjusted size for smaller screens */
-  }
-
-  .hero-section {
-    height: auto;
-    /* Allow dynamic height for smaller screens */
-    padding: 20px;
-  }
-
-  .content {
-    max-width: 90%;
-    padding: 10px;
-  }
-
-  .buttons {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .btn-primary,
-  .btn-secondary {
-    width: 100%;
-    font-size: 1rem;
-    padding: 0.8rem 1.5rem;
-  }
-
-  .content p.hero-subtitle {
-    margin-bottom: 1.5rem;
-    line-height: 1.5;
-  }
-}
-
-@media (max-width: 480px) {
-  .content h1.hero-title {
-    font-size: 2rem;
-    /* Further reduced size for extra-small screens */
-    margin-top: 4rem;
-  }
-
-  .content p.hero-subtitle {
-    font-size: 1.2rem;
-    /* Adjusted size for extra-small screens */
-    line-height: 1.4;
-  }
-
-  .btn-primary,
-  .btn-secondary {
-    font-size: 0.9rem;
-    padding: 0.6rem 1.2rem;
-  }
 }
 
 /* Buttons Styling */
@@ -140,6 +71,9 @@
   display: flex;
   gap: 1.5rem;
   justify-content: center;
+  flex-wrap: wrap;
+  z-index: 2;
+  /* Ensure buttons are above content */
 }
 
 /* Primary Button */
@@ -155,6 +89,7 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  width: auto;
 }
 
 .btn-primary:hover {
@@ -175,6 +110,7 @@
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  width: auto;
 }
 
 .btn-secondary:hover {
@@ -184,31 +120,66 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Animation Effects */
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
+@media (max-width: 768px) {
+  .hero-section {
+    height: auto;
+    padding: 20px;
   }
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .content h1.hero-title {
+    font-size: 2.5rem;
+    margin-top: 20rem;
+    /* Increased margin-top to move the title further down */
+    letter-spacing: 1px;
+  }
+
+  .content p.hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+    margin-top: 2rem;
+    /* Added more space above subtitle */
+  }
+
+  .content {
+    max-width: 90%;
+    padding: 10px;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
   }
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
+@media (max-width: 480px) {
+  .content h1.hero-title {
+    font-size: 2rem;
+    margin-top: 16rem;
+    /* Further increased margin for smaller screens */
   }
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .content p.hero-subtitle {
+    font-size: 1.2rem;
+    line-height: 1.4;
+    margin-top: 2.5rem;
+    /* More space above subtitle */
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
   }
 }
-
 
 
 /* Full Page Quote Block Styling */
@@ -978,6 +949,114 @@
   color: #1a1515;
   /* Light text for readability */
   line-height: 1.4;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .block-5 {
+    padding: 2rem 1rem;
+    /* Reduce padding for compactness */
+    height: auto;
+    /* Allow flexible height */
+  }
+
+  .block-5-container {
+    flex-direction: column;
+    /* Stack image and content vertically */
+    gap: 1rem;
+    /* Adjust spacing between image and content */
+    padding: 1rem;
+    /* Reduce padding */
+    box-shadow: none;
+    /* Simplify shadow for a cleaner mobile look */
+  }
+
+  /* Image Section */
+  .block-5-image {
+    order: 1;
+    /* Display image first */
+    transform: translateX(0);
+    /* Center the image */
+    opacity: 1;
+    /* Fully visible */
+  }
+
+  .block-5-image img {
+    width: 100%;
+    /* Full width for mobile */
+    height: auto;
+    border-radius: 6px;
+    /* Slightly rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+  }
+
+  /* Content Section */
+  .block-5-content {
+    order: 2;
+    /* Display content below image */
+    transform: translateX(0);
+    /* Reset animation position */
+    opacity: 1;
+    /* Fully visible */
+    text-align: center;
+    /* Center-align text */
+  }
+
+  .block-5-title {
+    font-size: 1.5rem;
+    /* Reduce font size for mobile */
+    margin-bottom: 0.8rem;
+  }
+
+  .block-5-description {
+    font-size: 0.85rem;
+    /* Adjust text size for readability */
+    margin-bottom: 1rem;
+    color: #333;
+    /* Ensure text color contrasts well */
+  }
+
+  /* Features Section */
+  .block-5-features {
+    grid-template-columns: 1fr;
+    /* Single column layout */
+    gap: 0.8rem;
+    /* Adjust gap between feature blocks */
+  }
+
+  .feature {
+    flex-direction: row;
+    /* Keep content horizontal for compact layout */
+    align-items: center;
+    /* Center-align items */
+    gap: 0.5rem;
+    /* Reduce gap between icon and text */
+    padding: 0.8rem;
+    /* Adjust padding for compactness */
+    border-radius: 4px;
+    /* Slightly rounded corners */
+  }
+
+  .feature i {
+    font-size: 1.4rem;
+    /* Reduce icon size */
+    margin-right: 0.5rem;
+    /* Adjust spacing */
+  }
+
+  .feature h4 {
+    font-size: 1rem;
+    /* Adjust title size */
+    margin-bottom: 0.2rem;
+    /* Reduce margin */
+  }
+
+  .feature p {
+    font-size: 0.8rem;
+    /* Reduce paragraph size */
+    line-height: 1.3;
+  }
 }
 
 
