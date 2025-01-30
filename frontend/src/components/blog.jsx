@@ -7,19 +7,27 @@ import Navbar from './navbar';
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
   const [selectedBlog, setSelectedBlog] = useState(null);
-  const [userLikes, setUserLikes] = useState(new Set()); // To track user likes
+  const [userLikes, setUserLikes] = useState(new Set(JSON.parse(localStorage.getItem('userLikes')) || []));
 
-  // Fetch blogs from the API
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const response = await axios.get('https://polar-painting-backend.onrender.com/api/blogroutes/blogs');
-        setBlogs(response.data);
+        
+        // Sort blogs by publishDate in descending order (latest first)
+        const sortedBlogs = response.data.sort((a, b) => {
+          const dateA = new Date(a.createdAt);
+          const dateB = new Date(b.createdAt);
+          
+          // Compare the dates to sort in descending order (latest first)
+          return dateB - dateA;
+        });
+
+        setBlogs(sortedBlogs); // Set the sorted blogs
       } catch (error) {
         console.error('Error fetching blogs:', error);
       }
     };
-
     fetchBlogs();
   }, []);
 
@@ -31,83 +39,52 @@ const Blog = () => {
     setSelectedBlog(null);
   };
 
-  // Handle like/unlike actions
-  const handleLike = async (blogId, isLiked) => {
-    if (userLikes.has(blogId) && isLiked) {
-      // User has already liked this post, so we will unlike it
-      return handleUnlike(blogId);
-    }
-
+  const handleLikeToggle = async (blogId) => {
+    const isLiked = userLikes.has(blogId);
     try {
-      // Determine the action: "like"
-      const response = await axios.put(
-        `https://polar-painting-backend.onrender.com/api/blogroutes/blogs/${blogId}/like`
-      );
-
-      // Get the updated blog data from the response
+      // Determine the URL to like or unlike the blog
+      const url = `https://polar-painting-backend.onrender.com/api/blogroutes/blogs/${blogId}/${isLiked ? 'unlike' : 'like'}`;
+      const response = await axios.put(url);
+  
+      // Get the updated likes count from the server response
       const updatedBlog = response.data;
-
-      // Update the local state with the new like count and like status
+      const updatedLikesCount = updatedBlog.likes; // Ensure this is the correct updated likes count
+  
+      // Update the blog state
       setBlogs((prevBlogs) =>
         prevBlogs.map((blog) =>
-          blog._id === blogId
-            ? {
-                ...blog,
-                likes: updatedBlog.likes, // Update like count from response
-                isLiked: true, // Mark it as liked
-              }
-            : blog
+          blog._id === blogId ? { ...blog, likes: updatedLikesCount } : blog
         )
       );
-
-      // Mark this blog as liked by the user
-      setUserLikes((prevLikes) => new Set(prevLikes).add(blogId));
+  
+      // Update the userLikes set and localStorage
+      const updatedLikes = new Set(userLikes);
+      if (isLiked) {
+        updatedLikes.delete(blogId); // Remove like
+      } else {
+        updatedLikes.add(blogId); // Add like
+      }
+      setUserLikes(updatedLikes);
+      localStorage.setItem('userLikes', JSON.stringify([...updatedLikes])); // Save updated likes to localStorage
     } catch (error) {
-      console.error('Error liking the blog:', error);
+      console.error('Error toggling like status:', error);
     }
   };
+  
 
-  // Handle unlike action
-  const handleUnlike = async (blogId) => {
-    try {
-      // Send request to the backend to unlike the blog
-      const response = await axios.put(
-        `https://polar-painting-backend.onrender.com/api/blogroutes/blogs/${blogId}/unlike`
-      );
+  // Function to fix the image URL if needed
+const getImageUrl = (url) => {
+  // Only prepend the base URL if it's missing from the start of the URL
+  if (url && !url.startsWith('https://polar-painting-backend.onrender.com/')) {
+    return `https://polar-painting-backend.onrender.com/${url}`;
+  }
+  return url;
+};
 
-      // Get the updated blog data from the response
-      const updatedBlog = response.data;
-
-      // Update the local state with the new like count and like status
-      setBlogs((prevBlogs) =>
-        prevBlogs.map((blog) =>
-          blog._id === blogId
-            ? {
-                ...blog,
-                likes: updatedBlog.likes, // Update like count from response
-                isLiked: false, // Mark it as unliked
-              }
-            : blog
-        )
-      );
-
-      // Remove this blog from the liked set
-      setUserLikes((prevLikes) => {
-        const updatedLikes = new Set(prevLikes);
-        updatedLikes.delete(blogId);
-        return updatedLikes;
-      });
-    } catch (error) {
-      console.error('Error unliking the blog:', error);
-    }
-  };
 
   return (
     <>
-      {/* Navbar */}
       <Navbar />
-
-      {/* Blog Hero Section */}
       <section className="blog-hero-section">
         <div className="blog-hero-overlay">
           <h1 className="blog-hero-heading">Explore Our Latest Blogs</h1>
@@ -115,7 +92,6 @@ const Blog = () => {
         </div>
       </section>
 
-      {/* Blog Page Content */}
       <div className="blog-page-container">
         <h1 className="blog-page-title">Featured Blogs</h1>
         <div className="blog-list-container">
@@ -126,18 +102,14 @@ const Blog = () => {
                   <h2 className="blog-card-title">"{blog.title}"</h2>
                   <div className="blog-meta-info">
                     <p className="blog-author-name">By {blog.author || 'Anonymous'}</p>
-                    <p className="blog-publish-date">
-                      {new Date(blog.createdAt).toLocaleDateString()}
-                    </p>
+                    <p className="blog-publish-date">{new Date(blog.createdAt).toLocaleDateString()}</p>
                   </div>
                 </div>
-
                 <div className="blog-card-content">
-                  {/* Main Blog Image */}
                   {blog.media && (
                     <div className="blog-thumbnail-container">
                       <img
-                        src={`https://polar-painting-backend.onrender.com/${blog.media}`}
+                        src={getImageUrl(blog.media)} // Use the helper function to get the correct image URL
                         alt="Blog Thumbnail"
                         className="blog-thumbnail-image"
                       />
@@ -147,24 +119,14 @@ const Blog = () => {
                     {blog.content.length > 150 ? blog.content.substring(0, 150) : blog.content}
                     {blog.content.length > 150 && '...'}
                   </p>
-
-                  {/* Like Button */}
                   <div className="blog-like-section">
-                    <button
-                      className="blog-like-button"
-                      onClick={() => handleLike(blog._id, blog.isLiked)}
-                    >
-                      <FaHeart /> {blog.isLiked ? 'Liked Already' : 'Like'}
+                    <button className="blog-like-button" onClick={() => handleLikeToggle(blog._id)}>
+                      <FaHeart color={userLikes.has(blog._id) ? 'red' : 'gray'} />
                     </button>
                     <span className="blog-likes-count">{blog.likes} Likes</span>
                   </div>
-
-                  {/* Read More Button */}
                   {blog.content.length > 150 && (
-                    <button
-                      className="blog-read-more-button"
-                      onClick={() => handleReadMore(blog)}
-                    >
+                    <button className="blog-read-more-button" onClick={() => handleReadMore(blog)}>
                       Read More
                     </button>
                   )}
@@ -177,51 +139,50 @@ const Blog = () => {
         </div>
       </div>
 
-  {/* Blog Modal for Detailed View */}
-{selectedBlog && (
-  <div className="blog-modal-overlay" onClick={closeModal}>
-    <div className="blog-modal-container" onClick={(e) => e.stopPropagation()}>
-      <button className="blog-modal-close" onClick={closeModal}>
-        <FaTimes />
-      </button>
-      <div className="blog-modal-content">
-        <h2 className="blog-modal-title">{selectedBlog.title}</h2>
-        <p className="blog-modal-author">By {selectedBlog.author || 'Anonymous'}</p>
-        <p className="blog-modal-date">
-          Published on {new Date(selectedBlog.createdAt).toLocaleDateString()}
-        </p>
-        <div className="blog-modal-body">
-          <p>{selectedBlog.content}</p>
-        </div>
-        {selectedBlog.media && (
-          <div className="blog-modal-main-image">
-            <img
-              src={`https://polar-painting-backend.onrender.com/${selectedBlog.media}`}
-              alt="Blog Medias"
-              className="blog-modal-image"
-            />
-          </div>
-        )}
-        {selectedBlog.subheadings &&
-          selectedBlog.subheadings.map((subheading, index) => (
-            <div key={index} className="blog-modal-subheading">
-              <h3 className="blog-modal-subheading-title">{subheading.title}</h3>
-              <p className="blog-modal-subheading-content">{subheading.content}</p>
-              {subheading.media && (
-                <img
-                  src={`https://polar-painting-backend.onrender.com/${subheading.media}`}
-                  alt={`Subheading Media ${index + 1}`}
-                  className="blog-modal-subheading-image"
-                />
+      {selectedBlog && (
+        <div className="blog-modal-overlay" onClick={closeModal}>
+          <div className="blog-modal-container" onClick={(e) => e.stopPropagation()}>
+            <button className="blog-modal-close" onClick={closeModal}>
+              <FaTimes />
+            </button>
+            <div className="blog-modal-content">
+              <h2 className="blog-modal-title">{selectedBlog.title}</h2>
+              <p className="blog-modal-author">By {selectedBlog.author || 'Anonymous'}</p>
+              <p className="blog-modal-date">
+                Published on {new Date(selectedBlog.createdAt).toLocaleDateString()}
+              </p>
+              <div className="blog-modal-body">
+                <p>{selectedBlog.content}</p>
+              </div>
+              {selectedBlog.media && (
+                <div className="blog-modal-main-image">
+                  <img
+                    src={getImageUrl(selectedBlog.media)} // Use the helper function to get the correct image URL
+                    alt="Blog Medias"
+                    className="blog-modal-image"
+                  />
+                </div>
               )}
+              {selectedBlog.subheadings &&
+                selectedBlog.subheadings.map((subheading, index) => (
+                  <div key={index} className="blog-modal-subheading">
+                    <h3 className="blog-modal-subheading-title">{subheading.title}</h3>
+                    <p className="blog-modal-subheading-content">{subheading.content}</p>
+                    {subheading.media && (
+                      <div className="blog-modal-subheading-image-container">
+                        <img
+                          src={getImageUrl(subheading.media)} // Use the helper function to get the correct image URL
+                          alt={`Subheading Media ${index + 1}`}
+                          className="blog-modal-subheading-image"
+                        />
+                      </div>
+                    )}
+                  </div>
+                ))}
             </div>
-          ))}
-      </div>
-    </div>
-  </div>
-)}
-
-
+          </div>
+        </div>
+      )}
     </>
   );
 };
