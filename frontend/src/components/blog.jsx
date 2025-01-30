@@ -73,13 +73,13 @@ const Blog = () => {
   
 
   // Function to fix the image URL if needed
-const getImageUrl = (url) => {
-  // Only prepend the base URL if it's missing from the start of the URL
-  if (url && !url.startsWith('https://polar-painting-backend.onrender.com/')) {
-    return `https://polar-painting-backend.onrender.com/${url}`;
-  }
-  return url;
-};
+  const getImageUrl = (url) => {
+    // Only prepend the base URL if it's missing from the start of the URL
+    if (url && !url.startsWith('https://polar-painting-backend.onrender.com/')) {
+      return `https://polar-painting-backend.onrender.com/${url}`;
+    }
+    return url;
+  };
 
 
   return (
@@ -99,7 +99,8 @@ const getImageUrl = (url) => {
             blogs.map((blog) => (
               <div key={blog._id} className="blog-card-container">
                 <div className="blog-card-header">
-                  <h2 className="blog-card-title">"{blog.title}"</h2>
+                  {/* Remove inverted commas from the blog title */}
+                  <h2 className="blog-card-title">{blog.title}</h2>
                   <div className="blog-meta-info">
                     <p className="blog-author-name">By {blog.author || 'Anonymous'}</p>
                     <p className="blog-publish-date">{new Date(blog.createdAt).toLocaleDateString()}</p>
@@ -146,6 +147,7 @@ const getImageUrl = (url) => {
               <FaTimes />
             </button>
             <div className="blog-modal-content">
+              {/* Remove inverted commas from the modal blog title */}
               <h2 className="blog-modal-title">{selectedBlog.title}</h2>
               <p className="blog-modal-author">By {selectedBlog.author || 'Anonymous'}</p>
               <p className="blog-modal-date">
