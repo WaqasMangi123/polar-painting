@@ -72,7 +72,7 @@ const CostEstimator = () => {
         estimate: estimate.toFixed(2),
       });
 
-      const response = await axios.post('https://polar-painting-backend.onrender.com/api/estimatoremail/send-estimate', {
+      const response = await axios.post('http://localhost:5000/api/estimatoremail/send-estimate', {
         name: contactInfo.name,
         email: contactInfo.email,
         phone: contactInfo.phone,
@@ -93,7 +93,7 @@ const CostEstimator = () => {
       setIsSubmitting(false); // Re-enable button
     }
   };
-  
+
   const handleInputChange = (e, index, type) => {
     const { name, value } = e.target;
     const updatedData = type === "floor" ? [...floorsData] : [...roomsData];
@@ -179,17 +179,27 @@ const CostEstimator = () => {
     let totalEstimate = 0;
     const breakdown = [];
     data.forEach((item, index) => {
-      const wallCost = 7.2 * (Math.sqrt(item.sqft) * item.ceilingHeight);
-      const ceilingCost = item.addOns.includes("Ceiling") ? item.sqft * 1.02 : 0;
-      const doorCost = (item.doorQuantity || 0) * 65;
-      const baseboardCost = item.addOns.includes("Baseboards") ? 1.02 * (Math.sqrt(item.sqft) * 4) : 0;
-      const crownMouldingCost = item.addOns.includes("Crown Moulding") ? 2.03 * (Math.sqrt(item.sqft) * 4) : 0;
+      // Wall painting cost: E = 6 × (√sqf × h)
+      const wallCost = 6 * (Math.sqrt(item.sqft) * item.ceilingHeight);
 
-      const addOnCost = doorCost + ceilingCost + baseboardCost + crownMouldingCost;
-      const totalCost = wallCost + addOnCost;
+      // Ceiling painting cost: E = 0.99 × sqf
+      const ceilingCost = item.addOns.includes("Ceiling") ? 0.99 * item.sqft : 0;
 
+      // Door painting cost: E = $50 × (# of doors)
+      const doorCost = (item.doorQuantity || 0) * 50;
+
+      // Trim painting cost: E = 3.96 × √sqf (applied to baseboards and crown moulding)
+      const trimCost = 3.96 * Math.sqrt(item.sqft);
+      const baseboardCost = item.addOns.includes("Baseboards") ? trimCost : 0;
+      const crownMouldingCost = item.addOns.includes("Crown Moulding") ? trimCost : 0;
+
+      // Total cost for this floor/room
+      const totalCost = wallCost + ceilingCost + doorCost + baseboardCost + crownMouldingCost;
+
+      // Add to the total estimate
       totalEstimate += totalCost;
 
+      // Add to the breakdown
       breakdown.push({
         index: index + 1,
         sqft: item.sqft,
@@ -212,129 +222,130 @@ const CostEstimator = () => {
 
 
 
-
   const generatePDF = () => {
     const doc = new jsPDF();
-
+  
     // Background Section with Two-Color Shading
     doc.setFillColor(34, 45, 50); // Dark blue
     doc.rect(0, 0, 70, 297, "F"); // Left-side shading
     doc.setFillColor(240, 248, 255); // Light blue
     doc.rect(70, 0, 140, 297, "F"); // Right-side shading
-
+  
     // Logo on the Left
     const logoPath = "/logo2.png"; // Replace with the actual logo path
     doc.addImage(logoPath, "PNG", 10, 10, 50, 40); // Increased logo height
-
+  
     // Header Text on the Lighter Area
     const headerStartY = 15; // Starting point for header
     doc.setFontSize(18);
     doc.setTextColor(0, 0, 0); // Black text for heading
     doc.setFont("helvetica", "bold");
     doc.text("POLAR PAINTING ESTIMATE", 85, headerStartY);
-
+  
     doc.setFontSize(12);
     doc.setTextColor(0, 0, 0); // Black text for subheading
     doc.setFont("helvetica", "normal");
     doc.text("SEE TERMS AND CONDITIONS AND PRIVACY POLICY", 85, headerStartY + 10);
-
+  
     // Contact Info Below the Subheading
     const infoText = [
-        "(647) 366-3737",
-        "info@polarpainting.ca",
-        "www.polarpainting.ca",
+      "(647) 366-3737",
+      "info@polarpainting.ca",
+      "www.polarpainting.ca",
     ];
-
+  
     infoText.forEach((line, index) => {
-        doc.setFontSize(10);
-        doc.setFont("helvetica", "normal");
-        doc.text(line, 85, headerStartY + 20 + index * 7);
+      doc.setFontSize(10);
+      doc.setFont("helvetica", "normal");
+      doc.text(line, 85, headerStartY + 20 + index * 7);
     });
-
+  
     // Generate Separate Tables for Each Room/Floor/Storey
     const data = projectType === "wholeHouse" ? floorsData : roomsData;
     let startY = 75;
-
+  
     data.forEach((item, index) => {
-        // Heading for Each Table
-        doc.setFontSize(14);
-        doc.setTextColor(255, 255, 255); // White text color
-        doc.setFont("helvetica", "bold");
-        doc.text(`Storey ${index + 1}`, 15, startY);
-
-        const breakdownHeader = [
-            ["#", "Sq Ft", "Ceiling Ht", "Wall Cost", "Ceiling Cost", "Door Cost", "Baseboard Cost", "Crown Moulding", "Total"]
-        ];
-
-        const wallCost = 7.2 * (Math.sqrt(item.sqft) * item.ceilingHeight);
-        const ceilingCost = item.addOns.includes("Ceiling") ? item.sqft * 1.02 : 0;
-        const doorCost = (item.doorQuantity || 0) * 65;
-        const baseboardCost = item.addOns.includes("Baseboards") ? 1.02 * (Math.sqrt(item.sqft) * 4) : 0;
-        const crownMouldingCost = item.addOns.includes("Crown Moulding") ? 2.03 * (Math.sqrt(item.sqft) * 4) : 0;
-
-        const totalCost = wallCost + ceilingCost + doorCost + baseboardCost + crownMouldingCost;
-
-        const breakdownData = [
-            [
-                `#${index + 1}`,
-                item.sqft || "-",
-                item.ceilingHeight || "-",
-                `$${wallCost.toFixed(2)}`,
-                ceilingCost ? `$${ceilingCost.toFixed(2)}` : "-",
-                doorCost ? `$${doorCost.toFixed(2)}` : "-",
-                baseboardCost ? `$${baseboardCost.toFixed(2)}` : "-",
-                crownMouldingCost ? `$${crownMouldingCost.toFixed(2)}` : "-",
-                `$${totalCost.toFixed(2)}`,
-            ]
-        ];
-
-        doc.autoTable({
-            head: breakdownHeader,
-            body: breakdownData,
-            startY: startY + 5,
-            margin: { left: 15, right: 15 },
-            tableWidth: 180,
-            theme: "grid",
-            styles: {
-                fillColor: [255, 255, 255],
-                textColor: [60, 60, 60],
-                halign: "center",
-                valign: "middle",
-            },
-            headStyles: {
-                fillColor: [34, 45, 50],
-                textColor: [255, 255, 255],
-                fontStyle: "bold",
-            },
-            alternateRowStyles: {
-                fillColor: [240, 240, 240],
-            },
-            tableLineWidth: 0.5,
-            tableLineColor: [255, 255, 255],
-        });
-
-        // Update startY for the next table
-        startY = doc.lastAutoTable.finalY + 10;
+      // Heading for Each Table
+      doc.setFontSize(14);
+      doc.setTextColor(255, 255, 255); // White text color
+      doc.setFont("helvetica", "bold");
+      doc.text(`Storey ${index + 1}`, 15, startY);
+  
+      const breakdownHeader = [
+        ["#", "Sq Ft", "Ceiling Ht", "Wall Cost", "Ceiling Cost", "Door Cost", "Baseboard Cost", "Crown Moulding", "Total"],
+      ];
+  
+      // Use the same cost calculation logic as in generateEstimate
+      const wallCost = 6 * (Math.sqrt(item.sqft) * item.ceilingHeight); // Wall painting cost: E = 6 × (√sqf × h)
+      const ceilingCost = item.addOns.includes("Ceiling") ? 0.99 * item.sqft : 0; // Ceiling painting cost: E = 0.99 × sqf
+      const doorCost = (item.doorQuantity || 0) * 50; // Door painting cost: E = $50 × (# of doors)
+      const trimCost = 3.96 * Math.sqrt(item.sqft); // Trim painting cost: E = 3.96 × √sqf
+      const baseboardCost = item.addOns.includes("Baseboards") ? trimCost : 0; // Baseboard cost
+      const crownMouldingCost = item.addOns.includes("Crown Moulding") ? trimCost : 0; // Crown moulding cost
+  
+      const totalCost = wallCost + ceilingCost + doorCost + baseboardCost + crownMouldingCost;
+  
+      const breakdownData = [
+        [
+          `#${index + 1}`,
+          item.sqft || "-",
+          item.ceilingHeight || "-",
+          `$${wallCost.toFixed(2)}`,
+          ceilingCost ? `$${ceilingCost.toFixed(2)}` : "-",
+          doorCost ? `$${doorCost.toFixed(2)}` : "-",
+          baseboardCost ? `$${baseboardCost.toFixed(2)}` : "-",
+          crownMouldingCost ? `$${crownMouldingCost.toFixed(2)}` : "-",
+          `$${totalCost.toFixed(2)}`,
+        ],
+      ];
+  
+      doc.autoTable({
+        head: breakdownHeader,
+        body: breakdownData,
+        startY: startY + 5,
+        margin: { left: 15, right: 15 },
+        tableWidth: 180,
+        theme: "grid",
+        styles: {
+          fillColor: [255, 255, 255],
+          textColor: [60, 60, 60],
+          halign: "center",
+          valign: "middle",
+        },
+        headStyles: {
+          fillColor: [34, 45, 50],
+          textColor: [255, 255, 255],
+          fontStyle: "bold",
+        },
+        alternateRowStyles: {
+          fillColor: [240, 240, 240],
+        },
+        tableLineWidth: 0.5,
+        tableLineColor: [255, 255, 255],
+      });
+  
+      // Update startY for the next table
+      startY = doc.lastAutoTable.finalY + 10;
     });
-
+  
     // Footer with Total Estimate
     const totalEstimate = data.reduce((sum, item) => {
-        const wallCost = 7.2 * (Math.sqrt(item.sqft) * item.ceilingHeight);
-        const ceilingCost = item.addOns.includes("Ceiling") ? item.sqft * 1.02 : 0;
-        const doorCost = (item.doorQuantity || 0) * 65;
-        const baseboardCost = item.addOns.includes("Baseboards") ? 1.02 * (Math.sqrt(item.sqft) * 4) : 0;
-        const crownMouldingCost = item.addOns.includes("Crown Moulding") ? 2.03 * (Math.sqrt(item.sqft) * 4) : 0;
-
-        return sum + wallCost + ceilingCost + doorCost + baseboardCost + crownMouldingCost;
+      const wallCost = 6 * (Math.sqrt(item.sqft) * item.ceilingHeight); // Wall painting cost
+      const ceilingCost = item.addOns.includes("Ceiling") ? 0.99 * item.sqft : 0; // Ceiling painting cost
+      const doorCost = (item.doorQuantity || 0) * 50; // Door painting cost
+      const trimCost = 3.96 * Math.sqrt(item.sqft); // Trim painting cost
+      const baseboardCost = item.addOns.includes("Baseboards") ? trimCost : 0; // Baseboard cost
+      const crownMouldingCost = item.addOns.includes("Crown Moulding") ? trimCost : 0; // Crown moulding cost
+  
+      return sum + wallCost + ceilingCost + doorCost + baseboardCost + crownMouldingCost;
     }, 0);
-
+  
     doc.setFillColor(34, 45, 50); // Dark blue background
     doc.rect(15, startY, 180, 10, "F");
     doc.setFontSize(14);
     doc.setTextColor(255, 255, 255); // White text for Total Estimate
     doc.setFont("helvetica", "bold");
     doc.text(`Total Estimate: $${totalEstimate.toFixed(2)}`, 20, startY + 7);
-
     // Move to Second Page for Terms and Conditions
     doc.addPage();
 
