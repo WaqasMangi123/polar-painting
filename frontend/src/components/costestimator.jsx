@@ -866,7 +866,7 @@ const renderStep = () => {
                       </button>
                       <input
                         type="number"
-                        value={item.doorQuantity || 1}
+                        value={item.doorQuantity || 0}
                         onChange={(e) =>
                           handleDoorQuantityChange(
                             e,
