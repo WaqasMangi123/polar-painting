@@ -180,7 +180,7 @@ const CostEstimator = () => {
     const breakdown = [];
     data.forEach((item, index) => {
       // Wall painting cost: E = 6 × (√sqf × h)
-      const wallCost = 6 * (Math.sqrt(item.sqft) * item.ceilingHeight);
+      const wallCost = 4.5 * (Math.sqrt(item.sqft) * item.ceilingHeight);
 
       // Ceiling painting cost: E = 0.99 × sqf
       const ceilingCost = item.addOns.includes("Ceiling") ? 0.99 * item.sqft : 0;
@@ -276,7 +276,7 @@ const CostEstimator = () => {
       ];
   
       // Use the same cost calculation logic as in generateEstimate
-      const wallCost = 6 * (Math.sqrt(item.sqft) * item.ceilingHeight); // Wall painting cost: E = 6 × (√sqf × h)
+      const wallCost = 4.5 * (Math.sqrt(item.sqft) * item.ceilingHeight); // Wall painting cost: E = 6 × (√sqf × h)
       const ceilingCost = item.addOns.includes("Ceiling") ? 0.99 * item.sqft : 0; // Ceiling painting cost: E = 0.99 × sqf
       const doorCost = (item.doorQuantity || 0) * 50; // Door painting cost: E = $50 × (# of doors)
       const trimCost = 3.96 * Math.sqrt(item.sqft); // Trim painting cost: E = 3.96 × √sqf
@@ -330,7 +330,7 @@ const CostEstimator = () => {
   
     // Footer with Total Estimate
     const totalEstimate = data.reduce((sum, item) => {
-      const wallCost = 6 * (Math.sqrt(item.sqft) * item.ceilingHeight); // Wall painting cost
+      const wallCost = 4.5 * (Math.sqrt(item.sqft) * item.ceilingHeight); // Wall painting cost
       const ceilingCost = item.addOns.includes("Ceiling") ? 0.99 * item.sqft : 0; // Ceiling painting cost
       const doorCost = (item.doorQuantity || 0) * 50; // Door painting cost
       const trimCost = 3.96 * Math.sqrt(item.sqft); // Trim painting cost
