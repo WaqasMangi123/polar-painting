@@ -258,7 +258,7 @@ const AboutUs = () => {
       We offer a satisfaction guarantee on all our services, from interior and
       exterior home painting to wallpaper installation and kitchen cabinet
       painting. If you’re not completely satisfied with the outcome, we will
-      work with you until you are, because your home deserves nothing less.
+      work with you until you are, because your home deserve nothing less.
     </p>
     {/* Contact Button */}
     <div className="satisfaction-cta">
